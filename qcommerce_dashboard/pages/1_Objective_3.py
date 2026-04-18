@@ -168,11 +168,14 @@ with tab3:
             text=[f"{v} ({v/len(users)*100:.1f}%)" for v in cat_series.values[::-1]],
             textposition="outside"
         ))
-        fig.update_layout(**CHART_LAYOUT, height=320,
-                          xaxis=dict(title="No. of Users", gridcolor="rgba(255,255,255,0.06)"),
-                          title=dict(text="Products Ordered (Multi-response, n=228)",
-                                     font=dict(color="#E8E8F0", family="Syne")))
-        st.plotly_chart(fig, use_container_width=True)
+        fig.update_layout(
+            height=320,
+            xaxis=dict(title="No. of Users", gridcolor="rgba(255,255,255,0.06)"),
+            title=dict(
+                text="Products Ordered (Multi-response, n=228)",
+                font=dict(color="#E8E8F0", family="Syne")
+            )
+        )
 
 # ── SECTION 2: Chi-Square Tests ────────────────────────────────────────────────
 st.markdown("---")
@@ -220,7 +223,7 @@ chi_df = pd.DataFrame(rows)
 pivot = chi_df.pivot(index="Behavior", columns="Demographic", values="Cramér's V")
 pivot_p = chi_df.pivot(index="Behavior", columns="Demographic", values="p-value")
 
-annots = [[f"{v:.2f}{'**' if pivot_p.loc[r,c]<0.01 else '*' if pivot_p.loc[r,c]<0.05 else ''}"
+annots = [[f"{pivot.iloc[r, c]:.2f}{'**' if pivot_p.loc[r,c]<0.01 else '*' if pivot_p.loc[r,c]<0.05 else ''}"
            for c in pivot.columns] for r in pivot.index]
 
 fig_hm = go.Figure(go.Heatmap(

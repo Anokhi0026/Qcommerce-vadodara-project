@@ -220,8 +220,8 @@ for bcol, blabel in behavior_map.items():
 chi_df = pd.DataFrame(rows)
 
 # Heatmap of Cramér's V
-pivot = chi_df.pivot(index="Behavior", columns="Demographic", values="Cramér's V")
-pivot_p = chi_df.pivot(index="Behavior", columns="Demographic", values="p-value")
+pivot = chi_df.pivot_table(index="Behavior", columns="Demographic", values="Cramér's V")
+pivot_p = chi_df.pivot_table(index="Behavior", columns="Demographic", values="p-value")
 
 annots = [[f"{pivot.iloc[r, c]:.2f}{'**' if pivot_p.loc[r,c]<0.01 else '*' if pivot_p.loc[r,c]<0.05 else ''}"
            for c in pivot.columns] for r in pivot.index]

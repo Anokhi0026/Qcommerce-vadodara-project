@@ -39,7 +39,7 @@ INCOME_ORDER = ["Below ₹20,000", "₹20,000 - ₹40,000", "₹40,000 - ₹60,0
                 "₹60,000 - ₹1,00,000", "Above ₹1,00,000"]
 
 import streamlit as st
-
+import os
 @st.cache_data
 def load_data():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))

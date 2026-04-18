@@ -223,7 +223,7 @@ chi_df = pd.DataFrame(rows)
 pivot = chi_df.pivot_table(index="Behavior", columns="Demographic", values="Cramér's V")
 pivot_p = chi_df.pivot_table(index="Behavior", columns="Demographic", values="p-value")
 
-annots = [[f"{pivot.iloc[r, c]:.2f}{'**' if pivot_p.loc[r,c]<0.01 else '*' if pivot_p.loc[r,c]<0.05 else ''}"
+annots = [[f"{pivot.loc[r, c]:.2f}{'**' if pivot_p.loc[r,c]<0.01 else '*' if pivot_p.loc[r,c]<0.05 else ''}"
            for c in pivot.columns] for r in pivot.index]
 
 fig_hm = go.Figure(go.Heatmap(

@@ -40,8 +40,6 @@ INCOME_ORDER = ["Below ₹20,000", "₹20,000 - ₹40,000", "₹40,000 - ₹60,0
 
 import streamlit as st
 
-import os
-
 @st.cache_data
 def load_data():
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -309,3 +307,4 @@ def get_mannwhitney_results():
                          "r": round(rb, 3), "Effect": eff,
                          "Significant": p < 0.05})
     return pd.DataFrame(results)
+

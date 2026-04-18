@@ -40,9 +40,14 @@ INCOME_ORDER = ["Below ₹20,000", "₹20,000 - ₹40,000", "₹40,000 - ₹60,0
 
 import streamlit as st
 
+import os
+
 @st.cache_data
 def load_data():
-    df = pd.read_excel("data/me.xlsx", sheet_name="raw", header=1)
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(BASE_DIR, "data", "me.xlsx")
+
+    df = pd.read_excel(file_path, sheet_name="raw", header=1)
     users = df[df["Adoption_Status"] == 1].copy().reset_index(drop=True)
     non_users = df[df["Adoption_Status"] == 0].copy().reset_index(drop=True)
     return df, users, non_users
